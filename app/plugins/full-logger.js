@@ -54,7 +54,8 @@ module.exports = {
         eol
       )
     );
-    if (command == "getRankerRtpvpReplayList") {      
+    //GetFavoriteRtpvpReplayList
+    if (command == "getRankerRtpvpReplayList" || command == "getCommunityRtpvpReplayList"  || command == "GetFavoriteRtpvpReplayList") {      
       logfileRTA.write(
         `,`.concat(          
           JSON.stringify(resp)          
