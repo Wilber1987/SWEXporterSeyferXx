@@ -18,7 +18,7 @@ class Help extends React.Component {
 
     return (
       <div>
-        <h1>Setup Instructions</h1>
+        <h1>HELPPPPPPPPPPPPPPPPPPPPP</h1>
         <p>You've gotten this far - that means you have successfully downloaded and started the program. The remaining steps are:</p>
         <ol>
           <li>Start the proxy running</li>

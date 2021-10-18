@@ -25,6 +25,10 @@ class Layout extends React.Component {
     Mousetrap.bind(['command+3', 'alt+3'], () => {
       this.navigate('help', 'help');
     });
+    Mousetrap.bind(['command+4', 'alt+4'], () => {
+      this.navigate('RTA_ETL', 'RTA_ETL');
+    });
+
 
     Mousetrap.bind(['command+b', 'ctrl+b'], () => {
       this.toggleCompactMode();
@@ -62,11 +66,15 @@ class Layout extends React.Component {
               onClick={this.navigateFromElement.bind(this)}
             >
               <Icon name="settings" />
-              Settings
+              Settings 2
             </Menu.Item>
             <Menu.Item name="help" link active={this.state.activeItem === 'help'} data-path="help" onClick={this.navigateFromElement.bind(this)}>
               <Icon name="help circle" />
               Help
+            </Menu.Item>
+            <Menu.Item name="RTA_ETL" link active={this.state.activeItem === 'RTA_ETL'} data-path="RTA_ETL" onClick={this.navigateFromElement.bind(this)}>
+              <Icon name="help circle" />
+              RTA_ETL            
             </Menu.Item>
             <span id="version">v{appVersion}</span>
           </Menu>
