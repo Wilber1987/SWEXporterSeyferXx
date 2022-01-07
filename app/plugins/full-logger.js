@@ -26,8 +26,8 @@ module.exports = {
     });
   },
   saveInBD(Obj, connection) {
-    var query = connection.query('INSERT INTO monpickdata(pick_slot_id, unit_master_id, banned,leader,win,user,rank,id_battle,date,temp, firstPick, lastpick)' +
-      'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    var query = connection.query('INSERT INTO monpickdata(pick_slot_id, unit_master_id, banned,leader,win,user,rank,id_battle,date,temp, firstPick, lastpick, id_combat)' +
+      'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
       [
         Obj.pick_slot_id,
         Obj.unit_master_id,
@@ -40,7 +40,8 @@ module.exports = {
         Obj.date,
         Obj.temp,
         Obj.firstPick,
-        Obj.lastpick
+        Obj.lastpick,
+        Obj.id_combat
       ], function (error, result) {
         if (error) {
           throw error;
@@ -51,7 +52,7 @@ module.exports = {
     );
   },
   logCommand(req, resp) {
-    SelectedSeason = "Season20-P1";
+    SelectedSeason = "Season20-P2";
     const { command } = req;
     const MonPickData = [];
     let logfile = fs.createWriteStream(path.join(config.Config.App.filesPath, 'full_log.txt'), {
@@ -109,7 +110,8 @@ module.exports = {
         }
         ranker_replay_list.forEach((RepList) => {
           //PRIMER
-          const BattleId = RepList.user_list["1"].wizard_name + "_" + RepList.user_list["2"].wizard_name + "_" + RepList.date_add + dat.tvaluelocal;
+          const BattleId = RepList.user_list["1"].wizard_id + "_" + RepList.user_list["2"].wizard_id + "_" + RepList.date_add;
+
           const users = [
             RepList.user_list["1"], RepList.user_list["2"]
           ];
@@ -182,7 +184,8 @@ module.exports = {
               }
               pick.user = user.wizard_name;
               pick.rank = user.rank;
-              pick.id_battle = BattleId;
+              pick.id_battle = BattleId + "_" + pick.unit_master_id;
+              pick.id_combat = BattleId;
               pick.date = RepList.date_add,
               pick.temp = SelectedSeason;
               MonPickData.push(pick);
